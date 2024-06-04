@@ -1,0 +1,16 @@
+@prefix p-plan: <http://purl.org/net/p-plan/#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix repr: <https://w3id.org/reproduceme#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+repr:Cell1 a p-plan:Step ;
+    p-plan:hasInputVar repr:Source1 ;
+    p-plan:hasInputVar repr:Input_file ;
+    p-plan:hasInputVar repr:col_names ;
+    p-plan:hasOutputVar repr:Output1 ;
+    p-plan:isStepOfPlan repr:XASworkflowFeS2 ;
+    repr:hasCellType "code" ;
+    repr:hasExecutionCount 1 ;
+    repr:hasIndex 1 .
+
