@@ -1,0 +1,8 @@
+ name:     Iron sulfide (pyrite)                        Feff 6L.02  potph 4.12
+ formula:  FeS_2
+ refer1:   Elliot (1960) J.Chem. Phys. 33(3), 903.
+ Abs   Z=26 Rmt= 1.116 Rnm= 1.361 K shell
+ Pot 1 Z=26 Rmt= 1.121 Rnm= 1.372
+ Pot 2 Z=16 Rmt= 1.120 Rnm= 1.390
+ Gam_ch=1.325E+00 H-L exch
+ Mu=-4.281E+00 kf=2.108E+00 Vint=-2.122E+01 Rs_int= 1.720

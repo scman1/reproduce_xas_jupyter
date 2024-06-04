@@ -1,0 +1,95 @@
+ Feff 6L.02
+ name:     Iron sulfide (pyrite)
+ formula:  FeS_2
+ refer1:   Elliot (1960) J.Chem. Phys. 33(3), 903.
+ Calculating potentials and phases...
+     free atom potential and density for atom type    0
+     free atom potential and density for atom type    1
+     free atom potential and density for atom type    2
+     overlapped potential and density for unique potential    0
+     overlapped potential and density for unique potential    1
+     overlapped potential and density for unique potential    2
+     muffin tin radii and interstitial parameters
+     phase shifts for unique potential    0
+     phase shifts for unique potential    1
+     phase shifts for unique potential    2
+ Preparing plane wave scattering amplitudes...
+   nncrit in prcrit       9
+ Searching for paths...
+     Rmax  6.0000  keep and heap limits   0.0000000   0.0000000
+    Preparing neighbor table
+     nfound  nheap  nheapx  nsc    r
+       1000    360     407   5    5.6619
+     Paths found     1978   (nheapx, nbx     407   5)
+ Eliminating path degeneracies...
+     Plane wave chi amplitude filter   2.50%
+     Unique paths     63,  total paths     778
+ Calculating EXAFS parameters...
+     Curved wave chi amplitude ratio   4.00%
+     Discard feff.dat for paths with cw ratio <   2.67%
+     path  cw ratio     deg    nleg  reff
+       1   100.000     6.000     2   2.2566
+       2    34.004     6.000     2   3.4449
+       3    10.152     2.000     2   3.5942
+       4    55.217    12.000     2   3.8212
+       5    13.922    12.000     3   3.9365
+       6    29.341    24.000     3   4.1672
+       7     4.320    12.000     3   4.3836
+       8     3.785     6.000     4   4.4281
+       9    17.345     6.000     2   4.4378
+      10     4.564    12.000     3   4.4582
+      11     3.287    12.000     3   4.5068
+      12    10.009     6.000     3   4.5131
+      13    11.378     6.000     4   4.5131
+      14     4.293     6.000     4   4.5131
+      15     7.912    12.000     4   4.5131
+      16     4.031    24.000     3   4.7613
+      17     6.903    24.000     3   4.7613
+      18     3.626    12.000     3   4.8360
+      19     7.595    12.000     3   4.8800
+      20     5.450    12.000     3   5.0032
+      21    11.486     6.000     2   5.1448
+      22    21.733    12.000     2   5.2460
+      23     2.703    12.000     3   5.2460
+      24     7.163    24.000     3   5.2578
+      25    26.479    12.000     3   5.2841
+      26     2.154    12.000     4   5.3222 neglected
+      27    16.901     6.000     4   5.3222
+      28     3.264    12.000     3   5.3266
+      29     2.126    24.000     3   5.3555 neglected
+      30     8.407    12.000     3   5.3567
+      31    11.212     6.000     2   5.4040
+      32     9.856    12.000     3   5.4073
+      33     2.107    12.000     3   5.4742 neglected
+      34     3.203    12.000     3   5.5053
+      35     5.637    12.000     3   5.5527
+      36     9.096    12.000     3   5.5527
+      37     9.453    12.000     3   5.5527
+      38     2.023    12.000     4   5.5687 neglected
+      39     2.870     6.000     4   5.5687
+      40     1.798     6.000     4   5.5687 neglected
+      41     2.366    12.000     3   5.6113 neglected
+      42     4.102    24.000     3   5.6619
+      43     5.025    24.000     3   5.6619
+      44     3.248    12.000     4   5.7000
+      45     1.880    12.000     4   5.7015 neglected
+      46     0.649    12.000     4   5.7015 neglected
+      47     2.754     6.000     4   5.7015
+      48     1.829     6.000     4   5.7015 neglected
+      49     1.361    12.000     4   5.7015 neglected
+      50     1.179    12.000     4   5.7015 neglected
+      51     8.397    12.000     4   5.7015
+      52     3.144    48.000     3   5.7318
+      53     2.757     2.000     2   5.7658
+      54     8.856     4.000     3   5.7658
+      55     7.847     2.000     4   5.7658
+      56     2.531    12.000     3   5.8277 neglected
+      57     0.686    12.000     4   5.8508 neglected
+      58    15.808    12.000     2   5.8562
+      59     2.304    12.000     3   5.8770 neglected
+      60     2.795    12.000     3   5.8783
+      61     2.237    12.000     3   5.9529 neglected
+      62     8.219    24.000     3   5.9670
+      63    10.657    24.000     3   5.9670
+    48 paths kept,   63 examined.
+ Feff done.  Have a nice day.
