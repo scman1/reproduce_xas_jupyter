@@ -6,11 +6,16 @@
 
 repr:Cell1 a p-plan:Step ;
     p-plan:hasInputVar repr:Source1 ;
-    p-plan:hasInputVar repr:Input_file ;
-    p-plan:hasInputVar repr:col_names ;
+    p-plan:hasInputVar repr:WFInputs ;
+    p-plan:hasInputVar repr:ColNames ;
     p-plan:hasOutputVar repr:Output1 ;
     p-plan:isStepOfPlan repr:XASworkflowFeS2 ;
     repr:hasCellType "code" ;
     repr:hasExecutionCount 1 ;
     repr:hasIndex 1 .
 
+
+repr:WFInputs a p-plan:Variable ;
+    rdf:value "larch.io" ;
+    repr:hasType "file" ;
+     repr:hasDataType "text/plain" .
