@@ -1,3 +1,4 @@
 *.pyc
 /lib/.ipynb_checkpoints
 /.ipynb_checkpoints
+/FeS2_feff
