@@ -200,7 +200,7 @@ def calc_with_defaults(xafs_group):
 # V             group using given parameters          V #
  #######################################################
 
-def fit_pre_post_edge(xas_data, pre_lower=-150, pre_upper=-60):
+def pre_post_edge(xas_data, pre_lower=-150, pre_upper=-60):
     pre_edge(energy=xas_data.energy, mu=xas_data.mu , group=xas_data, pre1 = pre_lower, pre2=pre_upper)
     return xas_data
 
