@@ -12,7 +12,9 @@ from pathlib import Path
 import logging
 # Changes from removing lp
 from larch import ParameterGroup, fitting
-from larch.xafs import TransformGroup, FeffitDataSet, feffit, feffit_report, FeffPathGroup
+# fitting path data
+from larch.xafs import TransformGroup, FeffitDataSet, feffit, feffit_report, \
+                       FeffPathGroup, path2chi, feffpath
 
 # plotting library
 import matplotlib.pyplot as plt
@@ -130,6 +132,49 @@ def spreadsheet_to_gds(a_sheet, session):
     gds_gp = dict_to_gds(data_dict, session)
     return gds_gp
 
+def update_paths_list(a_sheet, paths_list, larch_session):
+    df_sheet = ipysheet.to_dataframe(a_sheet).transpose()
+    # add new paths to list
+    for a_row in df_sheet:
+        if df_sheet[a_row][0] != 'file':
+            path_file = df_sheet[a_row][0] 
+            path_label = df_sheet[a_row][6] 
+            add_path = df_sheet[a_row][7] 
+            if add_path == '1':
+                in_list = False
+                for a_path in paths_list:
+                    if path_file == a_path.filename \
+                       and path_label == a_path.label:
+                            in_list = True
+                            break
+                # if the path is in the sel_paths list
+                if not in_list:
+                    new_path = FeffPathGroup(filename = path_file,
+                                             label    = path_label,
+                                             s02      = None,
+                                             e0       = None,
+                                             sigma2   = None,
+                                             deltar   = None,
+                                             _larch   = larch_session)
+                    new_path.use = False
+                    paths_list.append(new_path)
+    # remove non selected paths from list
+    rm_idxs = []
+    for p_idx, a_path in enumerate(paths_list):
+        in_sheet = False
+        for a_row in df_sheet:
+            if df_sheet[a_row][0] != 'file':
+                if a_path.filename == df_sheet[a_row][0] and \
+                   a_path.label == df_sheet[a_row][6] and \
+                   df_sheet[a_row][7] == '1':
+                        in_sheet=True
+                        break
+        if not in_sheet:
+            rm_idxs.append(p_idx)
+    rm_idxs.reverse()
+    for an_idx in rm_idxs:
+        del (paths_list[an_idx])
+    return paths_list
 
 # show the paths stored in path files in the FEFF directory.
 # These paths are stored by feff in the files.dat file.
@@ -219,8 +264,6 @@ def get_path_labels(paths_file):
     if a_path != {} and 'index' in a_path:
         all_paths[a_path['index']] = a_path
     return all_paths
-
-
 
 def show_selected_paths(paths_sheet, sel_path_list):
     df_sheet = ipysheet.to_dataframe(paths_sheet)
