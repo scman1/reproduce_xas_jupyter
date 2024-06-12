@@ -5,8 +5,8 @@ id,filename,label,s02,e0,sigma2,deltar
 4,FeS2_feff/feff0004.dat,Fe.Fe.4,amp,enot,ss3,delr3
 5,FeS2_feff/feff0005.dat,S.S.Fe.5,,,,
 6,FeS2_feff/feff0006.dat,Fe.S.Fe.6,,,,
-7,FeS2_feff/feff0007.dat,S.S.Fe.7,amp,,,,
-8,FeS2_feff/feff0008.dat,S.S.S.Fe.8,amp,,,,
-9,FeS2_feff/feff0009.dat,S.Fe.9,amp,enot,,,,
-10,FeS2_feff/feff0010.dat,S.S.Fe.10,amp,,,,
-11,FeS2_feff/feff0011.dat,S.S.Fe.11,amp,,,,
+7,FeS2_feff/feff0007.dat,S.S.Fe.7,,,,
+8,FeS2_feff/feff0008.dat,S.S.S.Fe.8,,,,
+9,FeS2_feff/feff0009.dat,S.Fe.9,,,,
+10,FeS2_feff/feff0010.dat,S.S.Fe.10,,,,
+11,FeS2_feff/feff0011.dat,S.S.Fe.11,,,,

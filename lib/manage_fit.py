@@ -290,7 +290,7 @@ def show_selected_paths(paths_sheet, sel_path_list):
 
     sp_sheet = ipysheet.sheet(rows=len(files)+1, columns=6)
     ipysheet.cell_range(sel_paths_data)
-    display(sp_sheet)
+    #display(sp_sheet)
     return sp_sheet
 
 # use data frame to create selected paths list

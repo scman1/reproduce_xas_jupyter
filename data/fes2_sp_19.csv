@@ -7,6 +7,6 @@ id,filename,label,s02,e0,sigma2,deltar
 6,FeS2_feff/feff0006.dat,Fe.S.Fe.6,amp,enot,ss*2,alpha*reff
 7,FeS2_feff/feff0007.dat,S.S.Fe.7,,,,
 8,FeS2_feff/feff0008.dat,S.S.S.Fe.8,,,,
-9,FeS2_feff/feff0009.dat,S.Fe.9,amp,,,,
+9,FeS2_feff/feff0009.dat,S.Fe.9,,,,
 10,FeS2_feff/feff0010.dat,S.S.Fe.10,,,,
 11,FeS2_feff/feff0011.dat,S.S.Fe.11,,,,

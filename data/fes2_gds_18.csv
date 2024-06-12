@@ -1,0 +1,10 @@
+id,name,value,expr,vary
+1,amp,1.0,,True
+2,enot,0.0,,True
+3,ss,0.003,,True
+4,ss1,0.003,,True
+5,ss2,0.003,,True
+6,ss3,0.003,,True
+7,ss4,0.003,,True
+8,ss5,0.003,,True
+9,alpha,0.0,,True
