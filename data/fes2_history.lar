@@ -1,0 +1,710 @@
+# larch history saved Thu Jun 13 16:29:31 2024
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+# make sure dictionary for Feff Paths exists
+try:
+    npaths = len(_feffpaths.keys())
+except:
+    _feffcache = {'paths':{}, 'runs':{}}  # group of all paths, info about Feff runs
+    _feffpaths = {}    # dict of paths currently in use, copied from _feffcache.paths
+#endtry
+
+_tmpfile_ = read_ascii('C:/harwell/psdi_reproducible/reproduce_xas_jupyter/data/fes2_rt01_mar02.xmu')
+fes2rt01m = read_ascii('C:/harwell/psdi_reproducible/reproduce_xas_jupyter/data/fes2_rt01_mar02.xmu', labels='energy, xmu, i0')
+fes2rt01m.path = 'C:/harwell/psdi_reproducible/reproduce_xas_jupyter/data/fes2_rt01_mar02.xmu'
+fes2rt01m.is_frozen = False
+fes2rt01m.energy_ref = 'fes2rt01m'
+fes2rt01m.datatype = 'xas'
+fes2rt01m.plot_xlabel = 'energy'
+fes2rt01m.plot_ylabel = 'xmu/i0'
+fes2rt01m.xdat = fes2rt01m.data[0, : ]
+fes2rt01m.ydat = fes2rt01m.data[1, : ]/fes2rt01m.data[2, : ]
+fes2rt01m.yerr = 1.0
+fes2rt01m.energy = fes2rt01m.xdat
+fes2rt01m.mu = fes2rt01m.ydat
+sort_xafs(fes2rt01m, overwrite=True, fix_repeats=True)
+fes2rt01m.groupname = 'fes2rt01m'
+fes2rt01m.filename = 'fes2_rt01_mar02.xmu'
+fes2rt01m.config = group(__name__='xas_viewer config')
+fes2rt01m.journal = journal(source='C:/harwell/psdi_reproducible/reproduce_xas_jupyter/data/fes2_rt01_mar02.xmu', xdat='energy', ydat='xmu/i0', source_desc='fes2_rt01_mar02.xmu: xmu/i0', yerr='1.0')
+fes2rt01m.energy_orig = fes2rt01m.energy[:]
+fes2rt01m.i0 = fes2rt01m.data[2, :]
+fes2rt01m.energy_shift = 0.0000
+fes2rt01m.energy = fes2rt01m.xdat = fes2rt01m.energy_orig + fes2rt01m.energy_shift
+pre_edge(fes2rt01m, pre1=-200.00, pre2=-30.00, nvict=0, nnorm=None, norm1=150.00, norm2=-1.00)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-200.00, pre2=-30.00, nvict=0, nnorm=None, norm1=150.00, norm2=852.25)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-117.00, pre2=-30.00, nvict=0, nnorm=2, norm1=150.00, norm2=852.25)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-117.00, pre2=-30.00, nvict=0, nnorm=2, norm1=150.00, norm2=852.25)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-150.00, pre2=-30.00, nvict=0, nnorm=2, norm1=150.00, norm2=852.25)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-150.00, pre2=-30.00, nvict=0, nnorm=2, norm1=150.00, norm2=852.25)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-150.00, pre2=-30.00, nvict=0, nnorm=2, norm1=150.00, norm2=700.00)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-150.00, pre2=-30.00, nvict=0, nnorm=None, norm1=150.00, norm2=700.00)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+pre_edge(fes2rt01m, pre1=-150.00, pre2=-30.00, nvict=0, nnorm=None, norm1=150.00, norm2=700.00)
+fes2rt01m.norm_poly = 1.0*fes2rt01m.norm
+autobk(fes2rt01m, rbkg= 1.000, ek0= 7117.0000,
+      kmin= 0.000, kmax= 15.000, kweight= 1.0,
+      clamp_lo= 1.0, clamp_hi= 20.0)
+xftf(fes2rt01m, kmin= 2.000, kmax= 14.500, dk= 4.000,
+      kweight= 2.000, window='Kaiser-Bessel', rmax_out=12.000)
+xftr(fes2rt01m, rmin= 1.000, rmax= 6.000,
+      dr= 0.500, window='Hanning')
+_feffit_params.s02 = param(1.0000, name='s02', vary=True)
+_feffit_params.e0 = param(0.0010, name='e0', vary=True)
+_feffit_params.delr_S226 = param(0.0010, name='delr_S226', vary=True, min=-0.75, max=0.75)
+_feffit_params.sigma2_S226 = param(0.0075, name='sigma2_S226', vary=True, min=0, max=1)
+
+_feffcache['paths']['Fe_S226'] = feffpath('C:/Users/scman1/larch/feff/FeS2_feff/feff0001.dat',
+                                             label='Fe_S226',feffrun='FeS2_feff', degen=1)
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226']], paramgroup=_feffit_params)
+
+_pathsum
+_feffpaths
+# ffts on group _pathsum
+xftf(_pathsum, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_pathsum, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_pathsum, label='model', win=1, rmax=8.0, show_window=False, new=False)
+_feffit_params.delr_S344 = param(0.0010, name='delr_S344', vary=True, min=-0.75, max=0.75)
+_feffit_params.sigma2_S344 = param(0.0093, name='sigma2_S344', vary=True, min=0, max=1)
+
+_feffcache['paths']['Fe_S344'] = feffpath('C:/Users/scman1/larch/feff/FeS2_feff/feff0002.dat',
+                                             label='Fe_S344',feffrun='FeS2_feff', degen=1)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+_feffit_params.delr_S359 = param(0.0010, name='delr_S359', vary=True, min=-0.75, max=0.75)
+_feffit_params.sigma2_S359 = param(0.0095, name='sigma2_S359', vary=True, min=0, max=1)
+
+_feffcache['paths']['Fe_S359'] = feffpath('C:/Users/scman1/larch/feff/FeS2_feff/feff0003.dat',
+                                             label='Fe_S359',feffrun='FeS2_feff', degen=1)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+_feffit_params.delr_Fe382 = param(0.0010, name='delr_Fe382', vary=True, min=-0.75, max=0.75)
+_feffit_params.sigma2_Fe382 = param(0.0098, name='sigma2_Fe382', vary=True, min=0, max=1)
+
+_feffcache['paths']['Fe_Fe382'] = feffpath('C:/Users/scman1/larch/feff/FeS2_feff/feff0004.dat',
+                                             label='Fe_Fe382',feffrun='FeS2_feff', degen=1)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=True)
+
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=False)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=False)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+# build feffit dataset, run feffit
+_feffit_dataset = feffit_dataset(data=fes2rt01m, transform=_feffit_trans, paths=_feffpaths)
+_feffit_result = feffit(_feffit_params, _feffit_dataset)
+if not hasattr(fes2rt01m, 'feffit_history'): fes2rt01m.feffit_history = []
+fes2rt01m.feffit_history.insert(0, _feffit_result)
+
+_feffit_dataset.model
+_feffit_dataset.paths
+# ffts on group _feffit_dataset.model
+xftf(_feffit_dataset.model, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_feffit_dataset.model, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_feffit_dataset.model, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=False)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+# build feffit dataset, run feffit
+_feffit_dataset = feffit_dataset(data=fes2rt01m, transform=_feffit_trans, paths=_feffpaths)
+_feffit_result = feffit(_feffit_params, _feffit_dataset)
+if not hasattr(fes2rt01m, 'feffit_history'): fes2rt01m.feffit_history = []
+fes2rt01m.feffit_history.insert(0, _feffit_result)
+
+_feffit_dataset.model
+_feffit_dataset.paths
+# ffts on group _feffit_dataset.model
+xftf(_feffit_dataset.model, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_feffit_dataset.model, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_feffit_dataset.model, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=False)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+_pathsum
+_feffpaths
+# ffts on group _pathsum
+xftf(_pathsum, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_pathsum, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_pathsum, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=False)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+_pathsum
+_feffpaths
+# ffts on group _pathsum
+xftf(_pathsum, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_pathsum, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_pathsum, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=False)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+# build feffit dataset, run feffit
+_feffit_dataset = feffit_dataset(data=fes2rt01m, transform=_feffit_trans, paths=_feffpaths)
+_feffit_result = feffit(_feffit_params, _feffit_dataset)
+if not hasattr(fes2rt01m, 'feffit_history'): fes2rt01m.feffit_history = []
+fes2rt01m.feffit_history.insert(0, _feffit_result)
+
+_feffit_dataset.model
+_feffit_dataset.paths
+# ffts on group _feffit_dataset.model
+xftf(_feffit_dataset.model, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_feffit_dataset.model, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_feffit_dataset.model, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='6.0 * s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='2.0 * s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='12.0 * s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=True)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+# build feffit dataset, run feffit
+_feffit_dataset = feffit_dataset(data=fes2rt01m, transform=_feffit_trans, paths=_feffpaths)
+_feffit_result = feffit(_feffit_params, _feffit_dataset)
+if not hasattr(fes2rt01m, 'feffit_history'): fes2rt01m.feffit_history = []
+fes2rt01m.feffit_history.insert(0, _feffit_result)
+
+_feffit_dataset.model
+_feffit_dataset.paths
+# ffts on group _feffit_dataset.model
+xftf(_feffit_dataset.model, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_feffit_dataset.model, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_feffit_dataset.model, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=True)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+_pathsum
+_feffpaths
+# ffts on group _pathsum
+xftf(_pathsum, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_pathsum, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_pathsum, label='model', win=1, rmax=8.0, show_window=False, new=False)
+### set up feffit 
+# create feffit Parameter Group to hold fit parameters
+_feffit_params = param_group()
+
+_feffit_params.s02 = param(1.0, vary=True)
+_feffit_params.e0 = param(0.001, vary=True)
+_feffit_params.delr_S226 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S226 = param(0.0075, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S344 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S344 = param(0.0093, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_S359 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_S359 = param(0.0095, min=0.0, max=1.0, vary=True)
+_feffit_params.delr_Fe382 = param(0.001, min=-0.75, max=0.75, vary=True)
+_feffit_params.sigma2_Fe382 = param(0.0098, min=0.0, max=1.0, vary=True)
+# define Fourier transform and fitting space
+_feffit_trans = feffit_transform(kmin=2.000, kmax=17.000, dk=4.0000, kw=2,
+                      window='Kaiser-Bessel', fitspace='r', rmin=1.000, rmax=5.000)
+
+# clear existing paths
+npaths = 0
+_feffpaths = {}
+#endtry
+
+
+_feffpaths['Fe_S226'] = use_feffpath(_feffcache['paths'], 'Fe_S226',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_S226', sigma2='sigma2_S226',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S344'] = use_feffpath(_feffcache['paths'], 'Fe_S344',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_S344', sigma2='sigma2_S344',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_S359'] = use_feffpath(_feffcache['paths'], 'Fe_S359',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_S359', sigma2='sigma2_S359',
+                                       third='0', ei='0', use=True)
+
+
+_feffpaths['Fe_Fe382'] = use_feffpath(_feffcache['paths'], 'Fe_Fe382',
+                                       s02='s02',  e0='e0',
+                                       deltar='delr_Fe382', sigma2='sigma2_Fe382',
+                                       third='0', ei='0', use=True)
+
+# sum paths using a list of paths and a group of parameters
+_pathsum = ff2chi([_feffpaths['Fe_S226'], _feffpaths['Fe_S344'], _feffpaths['Fe_S359'], _feffpaths['Fe_Fe382']], paramgroup=_feffit_params)
+
+# build feffit dataset, run feffit
+_feffit_dataset = feffit_dataset(data=fes2rt01m, transform=_feffit_trans, paths=_feffpaths)
+_feffit_result = feffit(_feffit_params, _feffit_dataset)
+if not hasattr(fes2rt01m, 'feffit_history'): fes2rt01m.feffit_history = []
+fes2rt01m.feffit_history.insert(0, _feffit_result)
+
+_feffit_dataset.model
+_feffit_dataset.paths
+# ffts on group _feffit_dataset.model
+xftf(_feffit_dataset.model, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(_feffit_dataset.model, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+# ffts on group fes2rt01m
+xftf(fes2rt01m, kmin=2.000, kmax=17.000, dk=4.000, window='Kaiser-Bessel', kweight=2.000)
+xftr(fes2rt01m, rmin=1.000, rmax=5.000, dr=0.100, window='hanning')
+
+plot_chir(fes2rt01m, label='data', win=1, rmax=8.0, title='fes2_rt01_mar02.xmu', show_window=False, new=True)
+plot_chir(_feffit_dataset.model, label='model', win=1, rmax=8.0, show_window=False, new=False)
+
